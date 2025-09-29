@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Note, CreateNoteParams } from "../types/note";
+import type { Note, CreateNoteParams } from "@/types/note";
 
 export interface FetchNotesParams {
   search?: string;
@@ -29,12 +29,17 @@ export const fetchNotes = async (
   return data;
 };
 
+export const fetchNoteById = async (id: number): Promise<Note> => {
+  const { data } = await api.get<Note>(`/notes/${id}`);
+  return data;
+};
+
 export const createNote = async (note: CreateNoteParams): Promise<Note> => {
   const { data } = await api.post<Note>("/notes", note);
   return data;
 };
 
-export const deleteNote = async (id: string): Promise<Note> => {
+export const deleteNote = async (id: number): Promise<Note> => {
   const { data } = await api.delete<Note>(`/notes/${id}`);
   return data;
 };
