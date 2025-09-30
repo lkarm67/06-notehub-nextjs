@@ -13,8 +13,20 @@ export const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+  
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
+  
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+  
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.overflow = originalBodyOverflow;
+    };
   }, [onClose]);
+  
 
   return createPortal(
     <div
