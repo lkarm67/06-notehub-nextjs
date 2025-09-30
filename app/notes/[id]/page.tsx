@@ -1,15 +1,21 @@
 import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { fetchNoteById } from "@/lib/api";
-import NoteDetailsClient from "@/app/notes/NoteDetails.client";
+import NoteDetailsClient from "../NoteDetails.client";
+
+type Params = {
+  id: string;
+};
 
 type Props = {
-  params: { id: string };
+  params: Promise<Params>;
 };
 
 const NoteDetails = async ({ params }: Props) => {
-  const id = Number(params.id);
+  const { id } = await params;
+
   const queryClient = new QueryClient();
 
+  // Prefetch даних нотатки
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),

@@ -29,7 +29,7 @@ export const fetchNotes = async (
   return data;
 };
 
-export const fetchNoteById = async (id: number): Promise<Note> => {
+export const fetchNoteById = async (id: string): Promise<Note> => {
   const { data } = await api.get<Note>(`/notes/${id}`);
   return data;
 };
@@ -39,7 +39,7 @@ export const createNote = async (note: CreateNoteParams): Promise<Note> => {
   return data;
 };
 
-export const deleteNote = async (id: number): Promise<Note> => {
+export const deleteNote = async (id: string): Promise<Note> => {
   const { data } = await api.delete<Note>(`/notes/${id}`);
   return data;
 };

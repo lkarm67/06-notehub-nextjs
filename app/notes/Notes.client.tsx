@@ -27,7 +27,7 @@ export default function NotesClient() {
 
   const { data, isLoading, isError } = useQuery<FetchNotesResponse, Error>({
     queryKey: ["notes", searchQuery, page],
-    queryFn: () => fetchNotes({ search: searchQuery || undefined, page, perPage: 10 }),
+    queryFn: () => fetchNotes({ search: searchQuery || undefined, page, perPage: 12 }),
     placeholderData: keepPreviousData,
   });
 
